@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { sideConfig } from '@/configs/siteConfig'
+import { siteConfig } from '@/configs/site'
 
 const Logo = () => {
   return (
@@ -19,8 +19,8 @@ const Logo = () => {
           y2="208"
           fill="none"
           stroke="currentColor"
-          stroke-linejoin="round"
-          stroke-width="32"
+          strokeLinejoin="round"
+          strokeWidth="32"
         ></line>
         <line
           x1="192"
@@ -29,13 +29,13 @@ const Logo = () => {
           y2="192"
           fill="none"
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="32"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="32"
         ></line>
       </svg>
       <span className="hidden font-bold lg:inline-block">
-        {sideConfig.name}
+        {siteConfig.name}
       </span>
     </Link>
   )
