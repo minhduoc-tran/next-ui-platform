@@ -7,7 +7,9 @@ import Balancer from 'react-wrap-balancer'
 
 import { Mdx } from '@/components/common/mdx-components'
 import DocsPaper from '@/components/common/paper'
+import { DashboardTableOfContents } from '@/components/common/toc'
 import { siteConfig } from '@/configs/site'
+import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn } from '@/lib/utils'
 
 interface DocPageProps {
@@ -77,6 +79,7 @@ export default async function DocsPage({ params }: DocPageProps) {
   if (!doc) {
     notFound()
   }
+  const toc = await getTableOfContents(doc.body.raw)
 
   return (
     <div className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
@@ -101,6 +104,14 @@ export default async function DocsPage({ params }: DocPageProps) {
           <Mdx code={doc.body.code} />
         </div>
         <DocsPaper doc={doc} />
+      </div>
+
+      <div className="hidden text-sm xl:block">
+        <div className="sticky top-16 -mt-10 pt-4">
+          <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] py-12">
+            <DashboardTableOfContents toc={toc} />
+          </div>
+        </div>
       </div>
     </div>
   )

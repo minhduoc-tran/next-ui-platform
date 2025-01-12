@@ -1,9 +1,16 @@
 import { useMDXComponent } from 'next-contentlayer2/hooks'
 
 import { cn } from '@/lib/utils'
+import { NpmCommands, TouchCommands } from '@/types/unist'
 
 import { Alert } from '../ui/alert'
 import { Callout } from './callout'
+import {
+  CopyButton,
+  CopyNpmCommandButton,
+  CopyTouchCommandButton,
+  copyToClipboardWithMeta,
+} from './copy-button'
 
 const components = {
   Callout,
@@ -135,6 +142,86 @@ const components = {
       {...props}
     />
   ),
+  pre: ({
+    className,
+    __rawString__,
+    __withMeta__,
+    __src__,
+    __event__,
+    __copyId__,
+    __windows__,
+    __unix__,
+    __bunCommand__,
+    __npmCommand__,
+    __pnpmCommand__,
+    __yarnCommand__,
+    ...props
+  }: React.HTMLAttributes<HTMLPreElement> & {
+    __copyId__?: string
+    __rawString__?: string
+    __withMeta__?: boolean
+    __src__?: string
+    __event__?:
+      | 'copy_npm_command'
+      | 'copy_touch_command'
+      | 'copy_usage_code'
+      | 'copy_source_code'
+  } & NpmCommands &
+    TouchCommands) => {
+    if (__copyId__ && __rawString__) {
+      return (
+        <div
+          id={`source-${__copyId__}`}
+          onClick={() => {
+            copyToClipboardWithMeta(__rawString__)
+          }}
+        />
+      )
+    }
+
+    return (
+      <>
+        <pre
+          className={cn(
+            'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg bg-zinc-800 px-2 py-4 [&_code]:bg-transparent',
+            className
+          )}
+          {...props}
+        />
+
+        {__rawString__ && !__windows__ && (
+          <CopyButton
+            value={__rawString__}
+            src={__src__}
+            event={__event__}
+            className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+          />
+        )}
+
+        {__windows__ && __unix__ && (
+          <CopyTouchCommandButton
+            commands={{ __windows__, __unix__ }}
+            className="absolute right-4 top-4"
+          />
+        )}
+
+        {__npmCommand__ &&
+          __yarnCommand__ &&
+          __pnpmCommand__ &&
+          __bunCommand__ && (
+            <CopyNpmCommandButton
+              commands={{
+                __npmCommand__,
+                __yarnCommand__,
+                __pnpmCommand__,
+                __bunCommand__,
+              }}
+              className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+            />
+          )}
+      </>
+    )
+  },
 }
 
 interface MdxProps {
