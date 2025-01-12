@@ -13,7 +13,7 @@ const GridBackground = ({
   return (
     <div
       className={cn(
-        'dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex h-[50rem] w-full items-center justify-center bg-white dark:bg-black',
+        'relative flex h-[50rem] w-full items-center justify-center bg-white bg-grid-black/[0.2] dark:bg-black dark:bg-grid-white/[0.2]',
         className
       )}
       {...props}

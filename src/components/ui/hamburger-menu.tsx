@@ -25,7 +25,7 @@ const Hamburger = ({
       {Array.from({ length: 3 }).map((_, index) => (
         <motion.div
           key={index}
-          className={cn('bg-primary h-1')}
+          className={cn('h-1 bg-primary')}
           initial={false}
           animate={
             index === 1

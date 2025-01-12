@@ -18,11 +18,21 @@ const MainNav = () => {
         <Link
           href="/docs"
           className={cn(
-            'hover:text-foreground/80 transition-colors',
+            'transition-colors hover:text-foreground/80',
             pathname === '/docs' ? 'text-foreground' : 'text-foreground/80'
           )}
         >
           Docs
+        </Link>
+
+        <Link
+          href="/docs/components/accordion"
+          className={cn(
+            'transition-colors hover:text-foreground/80',
+            pathname === '/docs' ? 'text-foreground' : 'text-foreground/80'
+          )}
+        >
+          Components
         </Link>
       </nav>
     </div>
