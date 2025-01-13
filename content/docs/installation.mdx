@@ -14,3 +14,22 @@ You don't need to install it as a dependency instead you can simply copy and pas
 3. **Lucide Icons**: Some components use [Lucide Icons](https://lucide.dev/guide/packages/lucide-react) or [Radix Icons](https://radix-ui.com/icons). You can use any other icon library or SVG icons as well.
 
 ## Setting up
+
+### Install util dependencies
+
+```bash
+  npm i framer-motion clsx tailwind-merge
+```
+
+### Add util file
+
+Create `utils.ts` file in the `libs` folder and paste the following code:
+
+```ts
+import { ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```

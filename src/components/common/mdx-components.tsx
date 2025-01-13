@@ -5,6 +5,8 @@ import { NpmCommands, TouchCommands } from '@/types/unist'
 
 import { Alert } from '../ui/alert'
 import { Callout } from './callout'
+import { CodeBlockWrapper } from './code-block-wrapper'
+import ComponentReview from './component-preview'
 import {
   CopyButton,
   CopyNpmCommandButton,
@@ -15,6 +17,7 @@ import {
 const components = {
   Callout,
   Alert,
+  ComponentReview,
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
@@ -183,7 +186,7 @@ const components = {
       <>
         <pre
           className={cn(
-            'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg bg-zinc-800 px-2 py-4 [&_code]:bg-transparent',
+            'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg bg-zinc-800 py-4 [&_code]:bg-transparent',
             className
           )}
           {...props}
@@ -222,6 +225,18 @@ const components = {
       </>
     )
   },
+  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <code
+      className={cn(
+        'relative rounded bg-zinc-800 px-2 py-[0.2rem] font-mono text-sm text-white',
+        className
+      )}
+      {...props}
+    />
+  ),
+  CodeBlockWrapper: ({ ...props }) => (
+    <CodeBlockWrapper className="rounded-md border" {...props} />
+  ),
 }
 
 interface MdxProps {

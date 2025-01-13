@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { allDocs } from 'contentlayer/generated'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, ExternalLink } from 'lucide-react'
 import Balancer from 'react-wrap-balancer'
 
 import { Mdx } from '@/components/common/mdx-components'
@@ -100,6 +101,32 @@ export default async function DocsPage({ params }: DocPageProps) {
             </p>
           )}
         </div>
+        {doc.links ? (
+          <div className="flex items-center space-x-2 pt-4">
+            {doc.links?.doc && (
+              <Link
+                href={doc.links.doc}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 rounded-md border border-transparent bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                Docs
+                <ExternalLink className="h-3 w-3" />
+              </Link>
+            )}
+            {doc.links?.api && (
+              <Link
+                href={doc.links.api}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 rounded-md border border-transparent bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                API Reference
+                <ExternalLink className="h-3 w-3" />
+              </Link>
+            )}
+          </div>
+        ) : null}
         <div className="pb-12 pt-8">
           <Mdx code={doc.body.code} />
         </div>
