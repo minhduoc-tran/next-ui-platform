@@ -7,12 +7,6 @@ import { Alert } from '../ui/alert'
 import { Callout } from './callout'
 import { CodeBlockWrapper } from './code-block-wrapper'
 import ComponentReview from './component-preview'
-import {
-  CopyButton,
-  CopyNpmCommandButton,
-  CopyTouchCommandButton,
-  copyToClipboardWithMeta,
-} from './copy-button'
 
 const components = {
   Callout,
@@ -148,16 +142,7 @@ const components = {
   pre: ({
     className,
     __rawString__,
-    __withMeta__,
-    __src__,
-    __event__,
     __copyId__,
-    __windows__,
-    __unix__,
-    __bunCommand__,
-    __npmCommand__,
-    __pnpmCommand__,
-    __yarnCommand__,
     ...props
   }: React.HTMLAttributes<HTMLPreElement> & {
     __copyId__?: string
@@ -172,14 +157,7 @@ const components = {
   } & NpmCommands &
     TouchCommands) => {
     if (__copyId__ && __rawString__) {
-      return (
-        <div
-          id={`source-${__copyId__}`}
-          onClick={() => {
-            copyToClipboardWithMeta(__rawString__)
-          }}
-        />
-      )
+      return <div id={`source-${__copyId__}`} />
     }
 
     return (
@@ -191,37 +169,6 @@ const components = {
           )}
           {...props}
         />
-
-        {__rawString__ && !__windows__ && (
-          <CopyButton
-            value={__rawString__}
-            src={__src__}
-            event={__event__}
-            className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
-          />
-        )}
-
-        {__windows__ && __unix__ && (
-          <CopyTouchCommandButton
-            commands={{ __windows__, __unix__ }}
-            className="absolute right-4 top-4"
-          />
-        )}
-
-        {__npmCommand__ &&
-          __yarnCommand__ &&
-          __pnpmCommand__ &&
-          __bunCommand__ && (
-            <CopyNpmCommandButton
-              commands={{
-                __npmCommand__,
-                __yarnCommand__,
-                __pnpmCommand__,
-                __bunCommand__,
-              }}
-              className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
-            />
-          )}
       </>
     )
   },

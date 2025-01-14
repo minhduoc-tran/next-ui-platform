@@ -40,8 +40,13 @@ export const docsConfig: DocsConfig = {
       title: 'Components',
       items: [
         {
-          title: 'Accordion',
-          href: '/docs/components/accordion',
+          title: 'Button',
+          href: '/docs/components/button',
+          items: [],
+        },
+        {
+          title: 'Badge',
+          href: '/docs/components/badge',
           items: [],
         },
       ],

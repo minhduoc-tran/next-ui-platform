@@ -4,15 +4,16 @@ import React from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Index: Record<string, any> = {
-  accordion: {
-    name: 'accordion',
+  button: {
+    name: 'button',
     description: '',
     registryDependencies: undefined,
-    component: React.lazy(() => import('./ui/accordion')),
-    files: [
-      {
-        path: 'ui/accordion.tsx',
-      },
-    ],
+    component: React.lazy(() => import('./ui/button.tsx')),
+  },
+  badge: {
+    name: 'badge',
+    description: '',
+    registryDependencies: undefined,
+    component: React.lazy(() => import('./ui/badge.tsx')),
   },
 }

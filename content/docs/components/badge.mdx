@@ -1,0 +1,80 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+<ComponentReview
+  name="badge"
+  className="[&_.preview>[data-orientation=vertical]]:sm:max-w-[70%]"
+  description="An accordion with one items"
+/>
+
+## Installation
+
+### Run the following command
+
+It will create a new file `badge.tsx` inside the `components/buttons/badge.tsx` directory.
+
+```bash
+  mkdir -p components/badge && touch components/buttons/badge.tsx
+```
+
+### Paste the code
+
+Open the newly created file and paste the following code:
+
+First, you need add `badgeVariants`
+
+```tsx
+import { type VariantProps, cva } from 'class-variance-authority'
+
+export const badgeVariants = cva(
+  'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+  {
+    variants: {
+      variant: {
+        default:
+          'border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80',
+        secondary:
+          'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        destructive:
+          'border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80',
+        outline: 'text-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+)
+```
+
+After add component base
+
+```tsx
+import * as React from 'react'
+
+import { cn } from '@/lib/utils'
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+export const Badge = ({ className, variant, ...props }: BadgeProps) => {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
+}
+```
+
+### Import code
+
+```tsx
+import { Badge } from '@/components/buttons/badge'
+
+const BadgeDemo = () => {
+  return <Badge>Badge</Badge>
+}
+
+export default BadgeDemo
+```
