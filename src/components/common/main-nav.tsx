@@ -26,7 +26,7 @@ const MainNav = () => {
         </Link>
 
         <Link
-          href="/docs/components/accordion"
+          href="/docs/components/badge"
           className={cn(
             'transition-colors hover:text-foreground/80',
             pathname === '/docs' ? 'text-foreground' : 'text-foreground/80'
